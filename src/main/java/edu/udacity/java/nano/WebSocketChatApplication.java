@@ -32,9 +32,9 @@ public class WebSocketChatApplication {
      */
     @GetMapping("/index")
     public ModelAndView index(String username, HttpServletRequest request) throws UnknownHostException {
-        if (StringUtils.isEmpty(username)) {
-            username = "guest";
-        }
+//        if (StringUtils.isEmpty(username)) {
+//            username = "guest";
+//        }
         ModelAndView modelAndView = new ModelAndView("chat");
         modelAndView.addObject("username", username);
         return modelAndView;
