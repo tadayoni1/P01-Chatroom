@@ -36,9 +36,10 @@
                         <input class="mdui-textfield-input" id="msg"/>
                     </div>
                     <div class="mdui-container" style="padding:20px 35px">
-                        <button class="mdui-btn mdui-color-theme mdui-ripple"
+                        <button class="mdui-btn mdui-color-theme-accent mdui-ripple"
                                 onclick="sendMsgToServer()">Send Message
-                        </button>                        <button class="mdui-btn mdui-color-theme mdui-ripple"
+                        </button>
+                        <button class="mdui-btn mdui-color-theme mdui-ripple"
                                 onclick="clearMsg()">Clear
                         </button>
                     </div>
@@ -56,9 +57,9 @@
                     <span class="mdui-chip-icon mdui-color-blue">
                         <i class="mdui-icon material-icons">face</i></span>
                     <span class="mdui-chip-title">Online Users</span>
-                    <!-- TODO: check online number num -->
+                    <span class="mdui-chip-title chat-num">0</span>
                 </div>
-                <div class="message-container">
+                <div class="message-container" style="margin-top: 20px">
 
                 </div>
             </div>
@@ -67,7 +68,7 @@
     </div>
 </div>
 
-<script th:inline="javascript">
+<script>
 
     /**
      * WebSocket Client
@@ -79,7 +80,8 @@
         /**
          * WebSocket client PS：URL shows WebSocket protocal, port number, and then end point.
          */
-        var webSocket = new WebSocket(/*[[${webSocketUrl}]]*/ 'ws://localhost:8080/chat');
+        var username = "/[[${username}]]/";
+        var webSocket = new WebSocket('ws://localhost:8080/chat/' + username);
         /**
          * websocket open connection.
          */
@@ -101,6 +103,14 @@
                     '<div class="mdui-card-primary">' +
                     '<div class="mdui-card-content message-content">' + message.username + "：" + message.msg + '</div>' +
                     '</div></div>');
+            } else if (message.type === 'ENTER') {
+                $messageContainer.append(
+                    '<div style="margin-top: 2px; color: #777777; font-size: 12px">' + message.username + " entered the chatroom." + '</div>'
+                    );
+            } else if (message.type === 'QUIT') {
+                $messageContainer.append(
+                    '<div class="margin-top: 2px; color: #777777; font-size: 12px">' + message.username + " left." + '</div>'
+                    );
             }
             $('.chat-num').text(message.onlineCount);
             var $cards = $messageContainer.children('.mdui-card:visible').toArray();
