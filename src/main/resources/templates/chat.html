@@ -109,7 +109,7 @@
                     );
             } else if (message.type === 'QUIT') {
                 $messageContainer.append(
-                    '<div class="margin-top: 2px; color: #777777; font-size: 12px">' + message.username + " left." + '</div>'
+                    '<div style="margin-top: 2px; color: #777777; font-size: 12px">' + message.username + " left." + '</div>'
                     );
             }
             $('.chat-num').text(message.onlineCount);

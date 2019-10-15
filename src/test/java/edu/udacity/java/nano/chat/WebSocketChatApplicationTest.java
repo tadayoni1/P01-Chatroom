@@ -24,7 +24,7 @@ public class WebSocketChatApplicationTest {
     @Test
     public void login() throws Exception {
         this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
-                .andExpect(view().name("/login"));
+                .andExpect(view().name("login"));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class WebSocketChatApplicationTest {
                 .andExpect(view().name("chat"));
 
         this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
-                .andExpect(view().name("/login"));
+                .andExpect(view().name("login"));
     }
 
 }
