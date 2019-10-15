@@ -35,8 +35,8 @@ public class WebSocketChatApplication {
         if (StringUtils.isEmpty(username)) {
             username = "guest";
         }
-        ModelAndView modelAndView = new ModelAndView("/chat");
+        ModelAndView modelAndView = new ModelAndView("chat");
         modelAndView.addObject("username", username);
-        modelAndView.addObject("webSocketUrl", "ws://" + InetAddress.getLocalHost().getHostAddress() + ":" + request.getServerPort() + request.getContextPath() + "/chat");
-        return modelAndView;    }
+        return modelAndView;
+    }
 }
